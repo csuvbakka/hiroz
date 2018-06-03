@@ -5,16 +5,19 @@ namespace hiroz
 class Hero
 {
 public:
-    Hero(int max_life_);
+    Hero(int max_hp_);
 
-    int life() const { return actual_life_; }
+    int hp() const { return actual_hp_; }
 
-    int gain_life(int amount);
-    int lose_life(int amount);
+    int gain_hp(int amount);
+    int lose_hp(int amount);
 
 private:
-    int max_life_;
-    int actual_life_;
+    void hold_hp_invariant();
+
+private:
+    int max_hp_;
+    int actual_hp_;
 };
 
 } // namespace hiroz

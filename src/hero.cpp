@@ -3,27 +3,33 @@
 namespace hiroz
 {
 
-Hero::Hero(int max_life)
-    : max_life_(max_life)
-    , actual_life_(max_life)
+Hero::Hero(int max_hp)
+    : max_hp_(max_hp)
+    , actual_hp_(max_hp)
 {
 }
 
-int Hero::gain_life(int amount)
+int Hero::gain_hp(int amount)
 {
-    actual_life_ += amount;
-    if (actual_life_ > max_life_)
-        actual_life_ = max_life_;
+    actual_hp_ += amount;
+    hold_hp_invariant();
 
-    return actual_life_;
+    return actual_hp_;
 }
 
-int Hero::lose_life(int amount)
+int Hero::lose_hp(int amount)
 {
-    actual_life_ -= amount;
-    if (actual_life_ < 0)
-        actual_life_ = 0;
+    actual_hp_ -= amount;
+    hold_hp_invariant();
 
-    return actual_life_;
+    return actual_hp_;
+}
+
+void Hero::hold_hp_invariant()
+{
+    if (actual_hp_ > max_hp_)
+        actual_hp_ = max_hp_;
+    if (actual_hp_ < 0)
+        actual_hp_ = 0;
 }
 } // namespace hiroz
