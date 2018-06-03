@@ -33,3 +33,6 @@
 
 # ranges library
 range-v3
+
+# catch
+test/catch
