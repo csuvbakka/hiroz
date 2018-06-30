@@ -1,5 +1,7 @@
 module hero;
 
+import std.algorithm : min, max;
+
 int max_life(int level, int vitality)
 in
 {
@@ -44,18 +46,13 @@ class Hero
 
     int recover_hp(int amount)
     {
-        damage_ -= amount;
-        if (damage_ < 0)
-            damage_ = 0;
+        damage_ = max(damage_ - amount, 0);
         return hp();
     }
 
     int lose_hp(int amount)
     {
-        damage_ += amount;
-        const total_life = max_life(level_, vitality_);
-        if (damage_ > total_life)
-            damage_ = total_life;
+        damage_ = min(damage_ + amount, max_life(level_, vitality_));
         return hp();
     }
 
